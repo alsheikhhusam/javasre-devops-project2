@@ -1,0 +1,26 @@
+Simulate some business 30%
+Documentation 5% - (javadocs)
+User Interaction 10%
+Unit Testing (70% coverage) 40%
+Presentation 5%
+Data Persistence 5%
+Logging 5%
+
+Goal: Build and deploy at least 2 apis to simulate a large business system. The system must be built using devops automation and kubernetes runtime env, with application monitoring and log aggregation
+
+Environment
+IDE(Java/SQL)
+Java 8
+JUnit
+Spring Test
+Spring Boot
+PostgresSQL
+Docker
+Kubernetes/GKE
+Grafana
+Loki
+Promtail
+Prometheus
+Helm
+Jenkins
+Any necessary 3rd party integrations
