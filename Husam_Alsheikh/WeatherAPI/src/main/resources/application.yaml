@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api-one
+
+api:
+  config:
+    api2URL: ${API2URL}
+    api3Curr: ${API3Curr}
+    api3SevenDay: ${API3SevenDay}
+    api3PrevFive: ${API3Prev5}
