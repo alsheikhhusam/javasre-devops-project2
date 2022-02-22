@@ -6,6 +6,4 @@ server:
 api:
   config:
     api2URL: ${API2URL}
-    api3Curr: ${API3Curr}
-    api3SevenDay: ${API3SevenDay}
-    api3PrevFive: ${API3Prev5}
+    api3URL: ${API3URL}

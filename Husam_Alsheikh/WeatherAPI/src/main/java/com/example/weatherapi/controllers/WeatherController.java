@@ -1,5 +1,7 @@
 package com.example.weatherapi.controllers;
 
+import com.example.weatherapi.dto.WeatherDTO;
+import com.example.weatherapi.services.WeatherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,31 +23,25 @@ public class WeatherController {
     @Value("${api.config.api2URL:http://localhost:3000/api-two/text/send-text}")
     String url2;
 
-    @Value("${api.config.api3Curr:http://localhost:3000/api-three/current}")
-    String api3_current;
-
-    @Value("${api.config.api3SevenDay:http://localhost:3000/api-three/7-day-forecast}")
-    String api3_seven_day;
-
-    @Value("${api.config.apiPrevFive:http://localhost:3000/api-three/prev-5}")
-    String api3_prev_5;
+    @Value("${api.config.api3URL:http://localhost:3000/api-three/update-db}")
+    String url3;
 
     private final RestTemplate restTemplate;
+    private final WeatherService weatherService;
 
     @Autowired
-    public WeatherController(RestTemplate restTemplate){
+    public WeatherController(RestTemplate restTemplate, WeatherService weatherService){
         this.restTemplate = restTemplate;
+        this.weatherService = weatherService;
     }
 
     @GetMapping(consumes = MediaType.TEXT_PLAIN_VALUE, path = "get-current-weather")
     public ResponseEntity<?> getCurrentWeather(@RequestBody String location){
-        //  Check if string is all digits. Then convert zip-code to int
-
         //  Search DB for weather data on this location
+        WeatherDTO weatherDTO = weatherService.getCurrentWeather(location);
 
-
-        //  If data not found. Then call api 3  //  FIX ME
-        ResponseEntity<Object> responseEntity = restTemplate.postForEntity(api3_current, location, null);
+        //  If weatherDTO is null, no weather data found on location. Call API3 //  FIX ME
+        ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url3, location, null);
         if(responseEntity.getStatusCode().is5xxServerError()){
             log.error("-> Failed to connect to API 3");
             return ResponseEntity.internalServerError().build();
