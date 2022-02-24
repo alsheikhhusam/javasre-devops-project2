@@ -9,5 +9,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface RequestRepo extends JpaRepository<Request, Integer> {
-    Request getByCities_CityNameOrZipCodes_Id(String location);
+    Request getByCitiesIdOrZipCodes_Id(Integer location);
 }

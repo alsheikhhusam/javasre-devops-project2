@@ -1,9 +1,13 @@
 package com.example.weatherapi.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
+@Getter @Setter
 @Table(name = "weather")
 public class Weather {
     @Id
@@ -11,8 +15,8 @@ public class Weather {
     @Column(name = "weather_id", nullable = false)
     private Integer id;
 
-    @Column(name = "date", nullable = false)
-    private OffsetDateTime date;
+    @Column(name = "weather_date", nullable = false)
+    private OffsetDateTime weatherDate;
 
     @Column(name = "temperature", nullable = false)
     private Double temperature;
@@ -35,76 +39,4 @@ public class Weather {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "req_id")
     private Request requests;
-
-    public Request getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Request requests) {
-        this.requests = requests;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getWindSpeed() {
-        return windSpeed;
-    }
-
-    public void setWindSpeed(Double windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    public Double getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(Double humidity) {
-        this.humidity = humidity;
-    }
-
-    public Double getPressure() {
-        return pressure;
-    }
-
-    public void setPressure(Double pressure) {
-        this.pressure = pressure;
-    }
-
-    public Double getFeelsLike() {
-        return feelsLike;
-    }
-
-    public void setFeelsLike(Double feelsLike) {
-        this.feelsLike = feelsLike;
-    }
-
-    public Double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
-    }
-
-    public OffsetDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(OffsetDateTime date) {
-        this.date = date;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

@@ -2,6 +2,7 @@ package com.example.weatherapi.controllers;
 
 import com.example.weatherapi.dto.TextDTO;
 import com.example.weatherapi.dto.WeatherDTO;
+import com.example.weatherapi.models.Weather;
 import com.example.weatherapi.services.WeatherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,8 @@ public class WeatherController {
                 log.error("-> Failed to connect to API 3");
                 return ResponseEntity.internalServerError().build();
             }
+
+            weatherDTO = weatherService.getCurrentWeather(location);
         }
 
         return ResponseEntity.ok(weatherDTO);
@@ -104,6 +107,8 @@ public class WeatherController {
                 log.error("-> Failed to connect to API 3");
                 return ResponseEntity.internalServerError().build();
             }
+
+            weatherDTOList = weatherService.getForecast(location);
         }
 
         return  ResponseEntity.ok(weatherDTOList);
@@ -128,6 +133,8 @@ public class WeatherController {
                 log.error("-> Failed to connect to API 3");
                 return ResponseEntity.internalServerError().build();
             }
+
+            weatherDTOList = weatherService.getPrev(location);
         }
 
         return  ResponseEntity.ok(weatherDTOList);

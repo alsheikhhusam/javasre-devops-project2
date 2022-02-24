@@ -1,9 +1,13 @@
 package com.example.weatherapi.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Getter @Setter
 @Table(name = "cities")
 public class City {
     @Id
@@ -22,44 +26,4 @@ public class City {
 
     @Column(name = "state_name", length = 50)
     private String stateName;
-
-    public String getStateName() {
-        return stateName;
-    }
-
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
-
-    public BigDecimal getLongNum() {
-        return longNum;
-    }
-
-    public void setLongNum(BigDecimal longNum) {
-        this.longNum = longNum;
-    }
-
-    public BigDecimal getLatNum() {
-        return latNum;
-    }
-
-    public void setLatNum(BigDecimal latNum) {
-        this.latNum = latNum;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

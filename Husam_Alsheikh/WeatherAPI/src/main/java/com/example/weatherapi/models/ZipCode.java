@@ -1,24 +1,25 @@
 package com.example.weatherapi.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
+@Getter @Setter
 @Table(name = "zip_codes")
 public class ZipCode {
     @Id
     @Column(name = "zip_num", nullable = false)
     private Integer id;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "lat_num", nullable = false, precision = 8, scale = 6)
+    private BigDecimal latNum;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    //TODO Reverse Engineering! Migrate other columns to the entity
+    @Column(name = "long_num", nullable = false, precision = 9, scale = 6)
+    private BigDecimal longNum;
 }

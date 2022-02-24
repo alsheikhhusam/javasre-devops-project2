@@ -19,7 +19,7 @@ public class WeatherDTO {
     private String description;
 
     public WeatherDTO(Weather weather){
-        this.date = weather.getDate().toString();
+        this.date = weather.getWeatherDate().toString();
         this.temp = weather.getTemperature();
         this.feels_like = weather.getFeelsLike();
         this.pressure = weather.getPressure();

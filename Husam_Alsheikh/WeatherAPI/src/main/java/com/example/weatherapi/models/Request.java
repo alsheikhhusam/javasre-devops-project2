@@ -1,9 +1,13 @@
 package com.example.weatherapi.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
+@Getter @Setter
 @Table(name = "requests")
 public class Request {
     @Id
@@ -21,36 +25,4 @@ public class Request {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zip_num")
     private ZipCode zipCodes;
-
-    public ZipCode getZipCodes() {
-        return zipCodes;
-    }
-
-    public void setZipCodes(ZipCode zipCodes) {
-        this.zipCodes = zipCodes;
-    }
-
-    public City getCities() {
-        return cities;
-    }
-
-    public void setCities(City cities) {
-        this.cities = cities;
-    }
-
-    public OffsetDateTime getReqDate() {
-        return reqDate;
-    }
-
-    public void setReqDate(OffsetDateTime reqDate) {
-        this.reqDate = reqDate;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
