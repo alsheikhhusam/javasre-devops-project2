@@ -24,7 +24,7 @@ public class WeatherController {
     @Value("${api.config.api2URL:http://localhost:3000/api-two/send-text}")
     String url2;
 
-    @Value("${api.config.api3URL:http://localhost:8081/api-three/update-db}")
+    @Value("${api.config.api3URL:http://localhost:8081/api-three/request/update-db}")
     String url3;
 
     private final RestTemplate restTemplate;

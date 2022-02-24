@@ -25,6 +25,10 @@ public class WeatherService {
         this.requestRepo = requestRepo;
     }
 
+    /**
+     * @param location Location for weather info
+     * @return Returns request ID if weather data for this location is already available
+     */
     public Integer checkData(String location){
         Request request = requestRepo.getByCities_CityNameOrZipCodes_Id(location);
 
@@ -70,7 +74,7 @@ public class WeatherService {
         //  If loc is zip-code. Convert to city_id/city_name
 
         //  Get current weather. Convert raw data to dto
-        List<Weather> weatherList = weatherRepo.getForecastByCity(checkData(location));
+        List<Weather> weatherList = weatherRepo.getPrevByCity(checkData(location));
 
         return weatherList.stream()
                 .map(w -> new WeatherDTO(w.getDate().toString(), w.getTemperature(), w.getFeelsLike(), w.getPressure(), w.getHumidity(), w.getWindSpeed(), w.getDescription()))
