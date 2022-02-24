@@ -8,5 +8,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseDTO {
+public class TextDTO {
+    private String phoneNum;
+    private String location;
 }

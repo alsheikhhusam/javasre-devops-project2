@@ -11,7 +11,7 @@ public class City {
     @Column(name = "city_id", nullable = false)
     private Integer id;
 
-    @Column(name = "city_name", length = 40)
+    @Column(name = "city_name", nullable = false, length = 40)
     private String cityName;
 
     @Column(name = "lat_num", nullable = false, precision = 8, scale = 6)
@@ -19,6 +19,17 @@ public class City {
 
     @Column(name = "long_num", nullable = false, precision = 9, scale = 6)
     private BigDecimal longNum;
+
+    @Column(name = "state_name", length = 50)
+    private String stateName;
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
 
     public BigDecimal getLongNum() {
         return longNum;
