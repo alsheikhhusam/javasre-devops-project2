@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("request")
@@ -31,6 +32,11 @@ public class WeatherController {
     private final WeatherService weatherService;
     private final RequestService requestService;
 
+    /**
+     * @param restTemplate Autowired restTemplate
+     * @param weatherService Autowired weatherService
+     * @param requestService Autowird requestService
+     */
     @Autowired
     public WeatherController(RestTemplate restTemplate, WeatherService weatherService, RequestService requestService) {
         this.restTemplate = restTemplate;
@@ -38,12 +44,19 @@ public class WeatherController {
         this.requestService = requestService;
     }
 
+    /**
+     *
+     * @param location City name or Zipcode
+     * @return 202 Accepted
+     * @throws Exception
+     */
     @PostMapping(value = "/update-db")
     public ResponseEntity acknowledgeReceipt(@RequestBody String location) throws Exception {
         int zipCode = 0;
         String cityName = "";
         City cityObject = new City();
         ZipCode zipObject = new ZipCode();
+
         try{
             zipCode = Integer.parseInt(location);
             zipObject = requestService.getZipCode(zipCode);
@@ -68,11 +81,15 @@ public class WeatherController {
             City temp = requestService.getCity(cityName);
             longitude = temp.getLongNum().toString();
             latitude = temp.getLatNum().toString();
+            log.info("Longitude for "+ cityName + ": " + longitude);
+            log.info("Latitude for "+ cityName + ": " + latitude);
         }
         else{
             ZipCode temp = requestService.getZipCode(zipCode);
             latitude = temp.getLatNum().toString();
             longitude = temp.getLongNum().toString();
+            log.info("Longitude for "+ zipCode + longitude);
+            log.info("Latitude for "+ zipCode +latitude);
         }
 
         // Grab Data from OpenWeather API
@@ -84,6 +101,7 @@ public class WeatherController {
                 + longitude
                 + "&exclude=current,minutely,hourly,alerts&units=imperial&appid="
                 + key, String.class);
+        log.info("JSON Value pulled from URL: " + theweather);
 
         Gson gson = new GsonBuilder().create();
         WeatherLoc weatherSaved = gson.fromJson(theweather, WeatherLoc.class);
@@ -97,6 +115,8 @@ public class WeatherController {
          zipObject = requestService.getZipCodeByLatNumAndLongNum(new BigDecimal(latitude), new BigDecimal(longitude));
          requestDTO.setCities(cityObject);
          requestDTO.setZipCodes(zipObject);
+
+         log.info("Request information has been saved to the database.");
 
          int requestId = requestService.save(requestDTO);
 
@@ -114,6 +134,9 @@ public class WeatherController {
              weather.setRequest(update);
              weatherService.save(weather);
 
+             log.info("Current weather conditions have been added to the database.");
+
+
         for(int i = 0; i < weatherSaved.daily.length - 1; i++){
             currentDate = new Date(weatherSaved.daily[i].dt * 1000L);
             offsetCurrentDate = currentDate.toInstant().atOffset(ZoneOffset.UTC);
@@ -126,7 +149,9 @@ public class WeatherController {
             weather.setDescription(weatherSaved.daily[i].weather[0].description);
             weather.setRequest(update);
             weatherService.save(weather);
+
         }
+        log.info("7 Day Forecast has been added to the database.");
         return ResponseEntity.accepted().build();
 
     }
