@@ -41,3 +41,17 @@ create table if not exists weather(
     wind_speed float not null,
     description varchar(20) not null
 );
+
+alter table weather
+add req_id int4 references requests(req_id),
+alter column feels_like drop not null ,
+alter column pressure drop not null ,
+alter column humidity drop not null ,
+alter column wind_speed drop not null ,
+alter column description drop not null;
+
+alter table cities 
+alter column city_name set not null;
+
+alter table weather 
+rename column date to weather_date;
