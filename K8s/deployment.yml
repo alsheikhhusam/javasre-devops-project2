@@ -20,14 +20,6 @@ spec:
           name: query-system-api
           ports:
             - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /k8s/demo
-              port: 8080
-          readinessProbe:
-            httpGet:
-              path: /k8s/demo
-              port: 8080
 
 ---
 
@@ -67,14 +59,6 @@ spec:
           name: twilio-system-api
           ports:
             - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /k8s/demo
-              port: 8080
-          readinessProbe:
-            httpGet:
-              path: /k8s/demo
-              port: 8080
 
 ---
 
@@ -116,11 +100,11 @@ spec:
             - containerPort: 8080
           livenessProbe:
             httpGet:
-              path: /k8s/demo
+              path: /api-one/weather
               port: 8080
           readinessProbe:
             httpGet:
-              path: /k8s/demo
+              path: /api-one/weather
               port: 8080
 
 ---
