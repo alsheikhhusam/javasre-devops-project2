@@ -14,11 +14,11 @@ public class Request {
     @Column(name = "req_date", nullable = false)
     private OffsetDateTime reqDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City cities;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "zip_num")
     private ZipCode zipCodes;
 

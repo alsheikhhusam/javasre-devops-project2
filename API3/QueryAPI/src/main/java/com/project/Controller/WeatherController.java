@@ -87,8 +87,8 @@ public class WeatherController {
             ZipCode temp = requestService.getZipCode(zipCode);
             latitude = temp.getLatNum().toString();
             longitude = temp.getLongNum().toString();
-            log.info("Longitude for "+ zipCode + longitude);
-            log.info("Latitude for "+ zipCode +latitude);
+            log.info("Longitude for "+ zipCode + ": " + longitude);
+            log.info("Latitude for "+ zipCode + ": " + latitude);
         }
 
         // Grab Data from OpenWeather API
@@ -104,7 +104,6 @@ public class WeatherController {
 
         Gson gson = new GsonBuilder().create();
         WeatherLoc weatherSaved = gson.fromJson(theweather, WeatherLoc.class);
-
 
         Date currentDate = new Date(System.currentTimeMillis());
         OffsetDateTime offsetCurrentDate = currentDate.toInstant().atOffset(ZoneOffset.UTC);
@@ -137,8 +136,7 @@ public class WeatherController {
              log.info("Current weather conditions have been added to the database.");
 
 
-
-        for(int i = 0; i < weatherSaved.daily.length - 1; i++){
+        for(int i = 1; i < weatherSaved.daily.length - 1; i++){
             currentDate = new Date(weatherSaved.daily[i].dt * 1000L);
             offsetCurrentDate = currentDate.toInstant().atOffset(ZoneOffset.UTC);
             weather.setDate(offsetCurrentDate);
@@ -153,17 +151,7 @@ public class WeatherController {
 
         }
         log.info("7 Day Forecast has been added to the database.");
-
-
         return ResponseEntity.accepted().build();
 
-    }
-
-
-
-    @GetMapping("/test")
-    public String test(){
-        log.info("Logback test");
-        return "Test Success.";
     }
 }

@@ -10,7 +10,10 @@ import com.example.weatherapi.models.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,14 +39,19 @@ public class WeatherService {
     public Integer checkData(String location){  //  Location could be zipCode or cityName
         int zip_city = 0;
 
+        OffsetDateTime requestDate = OffsetDateTime.now();
+        Request request;
+
         try{
             zip_city = Integer.parseInt(location);
+            request = requestRepo.getRequestByZipCodes_Id(zip_city);
         }catch (NumberFormatException e){
             City city = cityRepo.getByCityName(location);
             zip_city = city.getId();
+            request = requestRepo.getRequestByCitiesIdAndReqDate(zip_city);
         }
 
-        Request request = requestRepo.getByCitiesIdOrZipCodes_Id(zip_city, zip_city);
+        //Request request = requestRepo.getByCitiesIdOrZipCodes_Id(zip_city, Optional.of(zip_city));
 
         if(request == null){
             return -1;
@@ -69,6 +77,9 @@ public class WeatherService {
      * @return Weather data for 7-day forecast
      */
     public List<WeatherDTO> getForecast(String location){
+        if(checkData(location) == -1){
+            return null;
+        }
         //  Get current weather. Convert raw data to dto
         List<Weather> weatherList = weatherRepo.getForecastByCity(checkData(location));
 
