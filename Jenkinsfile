@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        dir('KubernetesProjectDemo') {
+        dir('API 1') {
           withMaven {
             sh 'mvn test'
           }
