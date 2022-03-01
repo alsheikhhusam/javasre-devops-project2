@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "windy-album-339219",
+  "private_key_id": "ddefce89035a1c032419f601d3179656466c4505",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDN6TwJvXuYJH/E\nVDAHURsf1kY1vgY6ust+kjKXazbHYwjJO4k+BO/XBTY2lU9jgMpB7qaATIos1YJe\nf1w1DfHasPVbUbhpW5nBGSMT1xESD5k/TVSidPl4QlKskeuecwOeTtd8foGYENzp\nss7vtxZEuiNGi0v3upt+B0kSQwsUjq5MpeBkab6w6M+JKHj4MG5aE7TAWV+eHSK7\nfhZVyoF3gEnHN0KukzQA++8ffw6D8RnFdt2OiAYdn85XKQ3+Q3gWKxNIDC3pm4iG\n/eEz6FaG6F7dh+tAVgoD+ZjFfQ3jDrd5ugEEeBav7P3KBBJlk8mHKWHVnur/hope\n/VFZyKjDAgMBAAECggEAOjaWIqrPJlQrSvYCHg9v+7A4aTkvyarFnSL36pcFBZma\nAkoyorYCmGeAzC2qJBdlFv7BU8RPzB0QnmajStyGY61jsE2KNT8QWOciY5mJ2fFP\nAfZ61vL7FGSrut4GHuWlQDxJ74hUWwlpayiCGINKaGO3VVpMP90h2J92qRMLLuQl\njYX2WRzsDf/tnUdTn6zGXKNdibbkbQXNqevsKzSb5p9dC09ZCT571Cg1M0POBBM/\nEGVk0XHdAjbnOHmSg2Sn8tT0RdA09x//BQ2Bxnxf5rBXp77dpex6b9uWmSBcmQFP\nqpoXNWOk4nZwxCwDu9ao1PMH445rNWiestljTfkIAQKBgQD0tXPDcIOi73FugYyo\nNwnXYVfF65Na85DuCzTWeOkjo70Rny9D3YKl0RImw1Fk6hGsqAtOLxXeSwFHHuL2\nrQEDe5Qg82HWEik5ebhZByuFQSzEPP0kszCpeoOdkAmCyq0VOypsXvKLgjgZFAHK\nmUfrAs9wYKncWYL1hyoY5VJGowKBgQDXaX7+A/3ppI/B5bdv1ChGXy0zn+BZ8giF\nYh2dRvvL/IFKIv8Xrc99kgNMLkrTfuJ6VC8iu4pGDZdS1apOL1Yx9UV+j9m5dB3+\n9FauXWYRyGHfRLUli63+bqDHolfUlRgeUlKKQ2/1NUmhI0MqghgS+LEWuhC1SHK5\nKUnZvCPXYQKBgQDfCYeSyblhR6Z2lyNxqoCQy4tpvLaY/kjJfnNRS/EK59GK/zDg\nRUQwCCfoJrvII8OqP5vWTfo7mtd2UEODm9nBp+AyTEKPEAx882E/29Yh5W59Ci2c\nRqqCvkS51q+kg0BQipW3Iq8k0rJ4wRCE7UJshCo3/hKz4O4JBYIsIM/lywKBgQC2\nUQe2nlJNaYZyqaZz87CSvwNW6j3MYtlravt9nhKHN5OF19DnjahLs0UvOQ8DqiSt\nPIsYbno9iEtHRKf7vHzLk7fZwo6YM/sfSlYDBfHZoyuS+GgI+wusiJ1z2adUuUvM\nfgh2FVWwyAUlaN70H1+YzvuzLI/vnv3aUWO78Uy0gQKBgQDKUmc+Y+5Mtc0peyJT\nKvyibAgjIqub34ZCZD6hug3EgrtbgehFDW5HHi5vyH/Sdum4z3ev3wIPZSs23C/t\nMIQoRy6P16Et7ET8wPmNusUYtVOCsP3AhkNlpiVzGMf6sj6NkT+VBe6l3PF+1fm/\nM2KsLHv8ScstK777L5vIrm5Kvw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "gce-service-account@windy-album-339219.iam.gserviceaccount.com",
+  "client_id": "108098855390981281325",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gce-service-account%40windy-album-339219.iam.gserviceaccount.com"
+}
