@@ -3,7 +3,11 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'sh \'mvn test\''
+        dir('KubernetesProjectDemo') {
+          withMaven {
+            sh 'mvn test'
+          }
+        }
       }
     }
 
