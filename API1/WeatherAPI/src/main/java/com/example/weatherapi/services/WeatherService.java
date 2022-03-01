@@ -77,16 +77,4 @@ public class WeatherService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * @param location Location for weather info
-     * @return Weather data for prev 5-day
-     */
-    public List<WeatherDTO> getPrev(String location){
-        //  Get current weather. Convert raw data to dto
-        List<Weather> weatherList = weatherRepo.getPrevByCity(checkData(location));
-
-        return weatherList.stream()
-                .map(w -> new WeatherDTO(w.getWeatherDate().toString(), w.getTemperature(), w.getFeelsLike(), w.getPressure(), w.getHumidity(), w.getWindSpeed(), w.getDescription()))
-                .collect(Collectors.toList());
-    }
 }
