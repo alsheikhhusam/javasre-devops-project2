@@ -14,7 +14,6 @@ public class WeatherService {
     /**
      * @param weatherRepository Autowired Repository
      */
-
     @Autowired
     public WeatherService(WeatherRepository weatherRepository) {
         this.weatherRepository = weatherRepository;

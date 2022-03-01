@@ -36,6 +36,7 @@ public class RequestService {
      * @param requestDTO Saves all location data requested from API into the database.
      * @return integer value for weather service
      */
+
     public int save(RequestDTO requestDTO){
         Request request = new Request();
         request.setReqDate(requestDTO.getReqDate());
@@ -52,6 +53,7 @@ public class RequestService {
     public City getCity(String cityName){
         return cityRepository.getCityByCityName(cityName);
     }
+
     /**
      * @param zipCode Takes in zip code.
      * @return Zipcode based on its ID.
