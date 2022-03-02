@@ -1,3 +1,8 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api-one
+
 spring:
   application:
     name: postgres
@@ -15,11 +20,6 @@ spring:
         format_sql: true
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-server:
-  port: 8080
-  servlet:
-    context-path: /api-one
 
 api:
   config:
