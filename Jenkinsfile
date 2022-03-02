@@ -2,10 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Test') {
-    when {
-      branch 'feature/*'
-      branch 'dev'
-    }
+    
       steps {
         dir('API1/WeatherAPI') {
           withMaven {
