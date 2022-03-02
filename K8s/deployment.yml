@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: Always
           name: query-system-api
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
 
 ---
 
@@ -58,7 +58,7 @@ spec:
           imagePullPolicy: Always
           name: twilio-system-api
           ports:
-            - containerPort: 8080
+            - containerPort: 3030
 
 ---
 
@@ -71,8 +71,8 @@ spec:
     app: twilio-system-api
   type: NodePort
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 3030
+      targetPort: 3030
 
 ---
 
