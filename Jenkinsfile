@@ -1,4 +1,9 @@
 pipeline {
+  environment {
+    registry = 'timhansz/weather-api'
+    dockerHubCreds = 'docker_hub'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Test') {
@@ -27,12 +32,12 @@ pipeline {
     }
     stage('Build') {
       when { anyOf {
+        branch 'feature/*'
         branch 'dev'
         branch 'main'
         }
       }
         steps {
-          sh "ls $WORKSPACE"
           dir('API1/WeatherAPI') {
             withMaven {
               sh 'mvn clean package -DskipTests'
@@ -51,15 +56,29 @@ pipeline {
         }
     }
     stage('Docker Build') {
-        when {
-            branch 'dev'
+        when { anyOf {
+        branch 'main'
         }
+      }
         steps {
+          dir('API1/WeatherAPI') {
             script {
                 echo "$registry:$currentBuild.number"
                 dockerImage = docker.build "$registry"
             }
-
+          }
+          dir('API2/Twilio-api') {
+            script {
+                echo "$registry:$currentBuild.number"
+                dockerImage = docker.build "$registry"
+            }
+          }
+          dir('API3/QueryAPI') {
+            script {
+                echo "$registry:$currentBuild.number"
+                dockerImage = docker.build "$registry"
+            }
+          }
         }
     }
   }
