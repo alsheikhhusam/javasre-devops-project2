@@ -4,6 +4,7 @@ pipeline {
     stage('Test') {
     when  {
       branch 'feature/*'
+      branch 'dev'
     }
       steps {
         dir('API1/WeatherAPI') {
