@@ -6,17 +6,17 @@ pipeline {
       steps {
         dir('API1/WeatherAPI') {
           withMaven {
-            sh 'mvn clean package -DskipTests'
+            sh 'mvn test'
           }
             }
-            dir('API2/twilio-api') {
+            dir('API2/Twilio-api') {
               withMaven {
-                  sh 'mvn clean package -DskipTests'
+                  sh 'mvn test'
               }
             }
             dir('API3/QueryAPI') {
               withMaven {
-                  sh 'mvn clean package -DskipTests'
+                  sh 'mvn test'
               }
             }
       }
@@ -33,7 +33,7 @@ pipeline {
               sh 'mvn clean package -DskipTests'
             }
           }
-          dir('API2/twilio-api') {
+          dir('API2/Twilio-api') {
             withMaven {
               sh 'mvn clean package -DskipTests'
             }
