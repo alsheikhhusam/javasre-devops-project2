@@ -2,9 +2,10 @@ pipeline {
   agent any
   stages {
     stage('Test') {
-    when  {
+    when  { anyOf {
       branch 'feature/*'
       branch 'dev'
+      }
     }
       steps {
         dir('API1/WeatherAPI') {
@@ -25,9 +26,10 @@ pipeline {
       }
     }
     stage('Build') {
-      when {
+      when { anyOf {
         branch 'dev'
         branch 'main'
+        }
       }
         steps {
           sh "ls $WORKSPACE"
@@ -48,6 +50,17 @@ pipeline {
           }
         }
     }
+    stage('Docker Build') {
+        when {
+            branch 'dev'
+        }
+        steps {
+            script {
+                echo "$registry:$currentBuild.number"
+                dockerImage = docker.build "$registry"
+            }
 
+        }
+    }
   }
 }
