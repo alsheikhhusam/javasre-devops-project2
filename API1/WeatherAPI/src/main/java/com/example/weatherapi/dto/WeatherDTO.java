@@ -16,7 +16,7 @@ public class WeatherDTO {
     private String description;
 
     public WeatherDTO(Weather weather){
-        this.date = weather.getWeatherDate().toString();
+        this.date = weather.getWeatherDate().toString().substring(0, 10);
         this.temp = weather.getTemperature();
         this.feels_like = weather.getFeelsLike();
         this.pressure = weather.getPressure();
@@ -27,8 +27,8 @@ public class WeatherDTO {
 
     @Override
     public String toString() {
-        return  "date: " + date + "\n" +
-                "temperature: " + temp + "\n" +
+        return  "Date: " + date + "\n" +
+                "Temperature: " + temp + "\n" +
                 "Feels like: " + feels_like + "\n" +
                 "Pressure: " + pressure + "\n" +
                 "Humidity: " + humidity + "\n" +

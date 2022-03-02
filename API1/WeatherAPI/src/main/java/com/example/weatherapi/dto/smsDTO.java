@@ -15,7 +15,7 @@ public class smsDTO {
 
     @Override
     public String toString() {
-        return "Weather from the city of " + location +
+        return "Weather information from: " + location +
                 "\n" + weatherDTO;
     }
 }
