@@ -10,7 +10,6 @@ pipeline {
   stages {
     stage('Test') {
     when  { anyOf {
-      branch 'feature/*'
       branch 'dev'
       }
     }
@@ -59,6 +58,7 @@ pipeline {
     }
     stage('Docker Build') {
         when { anyOf {
+          branch 'feature/*'
           branch 'dev'
           branch 'main'
         }
