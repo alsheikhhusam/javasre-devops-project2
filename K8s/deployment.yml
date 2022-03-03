@@ -37,7 +37,6 @@ metadata:
 spec:
   selector:
     app: query-system-api
-  type: NodePort
   ports:
     - port: 8081
       targetPort: 8081
@@ -83,7 +82,6 @@ metadata:
 spec:
   selector:
     app: twilio-system-api
-  type: NodePort
   ports:
     - port: 3030
       targetPort: 3030
@@ -132,20 +130,20 @@ metadata:
 spec:
   selector:
     app: weather-system-api
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 8080
       targetPort: 8080
 
 ---
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: weather-ingress
-spec:
-  defaultBackend:
-    service:
-      name: weather-service
-      port:
-        number: 8080
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: weather-ingress
+# spec:
+#   defaultBackend:
+#     service:
+#       name: weather-service
+#       port:
+#         number: 8080
