@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/send-text")
 public class Controller {
 
-
     private final SenderService senderService;
 
     @Autowired
