@@ -88,21 +88,27 @@ pipeline {
       }
       steps {
         dir('API1/WeatherAPI') {
-          docker.withRegistry('', dockerHubCreds) {
-            dockerImage.push("$currentBuild.number")
-            dockerImage.push("latest")
+          script {
+            docker.withRegistry('', dockerHubCreds) {
+              dockerImage.push("$currentBuild.number")
+              dockerImage.push("latest")
+            }
           }
         }
         dir('API2/Twilio-api') {
-          docker.withRegistry('', dockerHubCreds) {
-            dockerImage.push("$currentBuild.number")
-            dockerImage.push("latest")
+          script {
+            docker.withRegistry('', dockerHubCreds) {
+              dockerImage.push("$currentBuild.number")
+              dockerImage.push("latest")
+            }
           }
         }
-        dir('API1/QueryAPI') {
-          docker.withRegistry('', dockerHubCreds) {
-            dockerImage.push("$currentBuild.number")
-            dockerImage.push("latest")
+        dir('API3/QueryAPI') {
+          script {
+            docker.withRegistry('', dockerHubCreds) {
+              dockerImage.push("$currentBuild.number")
+              dockerImage.push("latest")
+            }
           }
         }
       }
