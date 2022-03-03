@@ -1,6 +1,8 @@
 pipeline {
   environment {
-    registry = 'husamalsheikh'
+    api1Registry = 'husamalsheikh/weatherapi'
+    api2Registry = 'husamalsheikh/twilioapi'
+    api3Registry = 'husamalsheikh/queryapi'
     dockerHubCreds = 'docker_hub'
     dockerImage = ''
   }
@@ -65,19 +67,19 @@ pipeline {
           dir('API1/WeatherAPI') {
             script {
                 echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
+                dockerImage = docker.build "$api1Registry"
             }
           }
           dir('API2/Twilio-api') {
             script {
                 echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
+                dockerImage = docker.build "$api2Registry"
             }
           }
           dir('API3/QueryAPI') {
             script {
                 echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
+                dockerImage = docker.build "$api3Registry"
             }
           }
         }
