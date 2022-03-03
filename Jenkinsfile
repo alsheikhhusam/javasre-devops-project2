@@ -17,20 +17,20 @@ pipeline {
           withMaven {
             sh 'mvn test'
           }
-            }
-            dir('API2/Twilio-api') {
-              withMaven {
-                  sh 'mvn test'
-              }
-            }
-            dir('API3/QueryAPI') {
-              withMaven {
-                  sh 'mvn test'
-              }
-            }
+        }
+        dir('API2/Twilio-api') {
+          withMaven {
+              sh 'mvn test'
+          }
+        }
+        dir('API3/QueryAPI') {
+          withMaven {
+              sh 'mvn test'
+          }
+        }
       }
     }
-    stage('Build/package') {
+    stage('Maven Package') {
       when { anyOf {
         branch 'feature/*'
         branch 'dev'
