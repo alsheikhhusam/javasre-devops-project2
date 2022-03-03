@@ -66,19 +66,19 @@ pipeline {
         steps {
           dir('API1/WeatherAPI') {
             script {
-                echo "$registry:$currentBuild.number"
+                echo "$api1Registry:$currentBuild.number"
                 dockerImage = docker.build "$api1Registry"
             }
           }
           dir('API2/Twilio-api') {
             script {
-                echo "$registry:$currentBuild.number"
+                echo "$api2Registry:$currentBuild.number"
                 dockerImage = docker.build "$api2Registry"
             }
           }
           dir('API3/QueryAPI') {
             script {
-                echo "$registry:$currentBuild.number"
+                echo "$api3Registry:$currentBuild.number"
                 dockerImage = docker.build "$api3Registry"
             }
           }
