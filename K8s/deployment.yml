@@ -112,16 +112,19 @@ spec:
           name: weather-system-api
           ports:
             - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /api-one/weather
-              port: 8080
           readinessProbe:
-            httpGet:
-              path: /api-one/weather
+            tcpSocket:
               port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
