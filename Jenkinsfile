@@ -1,8 +1,8 @@
 pipeline {
   environment {
-    api1Registry = 'husamalsheikh/weatherapi:latest'
-    api2Registry = 'husamalsheikh/twilioapi:latest'
-    api3Registry = 'husamalsheikh/queryapi:latest'
+    api1Registry = 'husamalsheikh/weatherapi'
+    api2Registry = 'husamalsheikh/twilioapi'
+    api3Registry = 'husamalsheikh/queryapi'
     dockerHubCreds = 'docker_hub'
     dockerImage = ''
   }
