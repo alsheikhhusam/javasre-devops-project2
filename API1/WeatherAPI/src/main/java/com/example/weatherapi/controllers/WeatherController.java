@@ -23,7 +23,7 @@ public class WeatherController {
     @Value("8080")
     int port;
 
-    @Value("${api.config.api2URL:http://localhost:3000/api-two/send-text}")
+    @Value("${api.config.api2URL:http://localhost:3030/api-two/send-text}")
     String url2;
 
     @Value("${api.config.api3URL:http://localhost:8081/api-three/request/update-db}")
@@ -50,6 +50,21 @@ public class WeatherController {
     public ResponseEntity<?> sendText(@RequestBody TextDTO textDTO){
         List<String> smsString = Collections.singletonList(textDTO.getPhoneNum());
 
+        WeatherDTO weatherDTO = weatherService.getCurrentWeather(textDTO.getLocation());
+
+        //  If weatherDTO is null, no weather data found on location. Call API3 (Query API)
+        if(weatherDTO == null) {
+            log.info("-> No data on {}", textDTO.getLocation());
+            log.info("-> Requesting Weather Update for {}", textDTO.getLocation());
+
+            ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url3, textDTO.getLocation(), null);
+            if(responseEntity.getStatusCode().is5xxServerError()){
+                log.error("-> Failed to connect to API 3");
+                return ResponseEntity.internalServerError().build();
+            }
+
+            weatherDTO = weatherService.getCurrentWeather(textDTO.getLocation());
+        }
         smsString.add(weatherService.getCurrentWeather(textDTO.getLocation()).toString());
 
         ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url3, smsString, null);

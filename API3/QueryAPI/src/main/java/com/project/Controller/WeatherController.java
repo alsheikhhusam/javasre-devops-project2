@@ -26,7 +26,6 @@ import java.util.Date;
 @Slf4j
 public class WeatherController {
 
-
     private final RestTemplate restTemplate;
     private final WeatherService weatherService;
     private final RequestService requestService;

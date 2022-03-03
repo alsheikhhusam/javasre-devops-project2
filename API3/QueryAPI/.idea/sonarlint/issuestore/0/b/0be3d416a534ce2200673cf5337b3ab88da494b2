@@ -1,0 +1,16 @@
+
+t	java:S116
+"ZRename this field "timezone_offset" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Öòüÿÿÿÿ
+N	java:S106""9Replace this use of System.out or System.err by a logger.(ö¬
+e
+java:S1104"OMake lat a static final constant or non-public and provide accessors if needed.(¼ôÒ
+j
+java:S1104"OMake lon a static final constant or non-public and provide accessors if needed.(ù¡ø…øÿÿÿÿ
+j
+java:S1104	"TMake timezone a static final constant or non-public and provide accessors if needed.(ºë©
+v
+java:S1104
+"[Make timezone_offset a static final constant or non-public and provide accessors if needed.(Öòüÿÿÿÿ
+f
+java:S1104"QMake daily a static final constant or non-public and provide accessors if needed.(“±ºA
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ô‹ùĞøÿÿÿÿ
