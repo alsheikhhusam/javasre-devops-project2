@@ -3,7 +3,6 @@ package com.example.weatherapi.controllers;
 import com.example.weatherapi.dto.TextDTO;
 import com.example.weatherapi.dto.WeatherDTO;
 import com.example.weatherapi.dto.smsDTO;
-import com.example.weatherapi.models.Weather;
 import com.example.weatherapi.services.WeatherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,6 +62,7 @@ public class WeatherController {
                 return ResponseEntity.internalServerError().build();
             }
 
+            log.info("-> Data on {} updated", textDTO.getLocation());
             weatherDTO = weatherService.getCurrentWeather(textDTO.getLocation());
         }
 
@@ -76,7 +75,6 @@ public class WeatherController {
         }
 
         log.info("-> Text message sent");
-
         return ResponseEntity.ok().build();
     }
 
@@ -100,6 +98,7 @@ public class WeatherController {
                 return ResponseEntity.internalServerError().build();
             }
 
+            log.info("-> Data on {} updated", location);
             weatherDTO = weatherService.getCurrentWeather(location);
         }
 
@@ -124,6 +123,8 @@ public class WeatherController {
                 log.error("-> Failed to connect to API 3");
                 return ResponseEntity.internalServerError().build();
         }
+
+            log.info("-> Data on {} updated", location);
             weatherDTOList = weatherService.getForecast(location);
         }
 

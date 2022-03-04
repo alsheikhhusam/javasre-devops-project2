@@ -29,7 +29,7 @@ public class Controller {
      */
     @PostMapping
     public void sendSms(@Validated @RequestBody List<String> weatherDTO) {
-        log.info("-> API 2 Recieved request");
+        log.info("-> API 2 Received request");
         
         SmsRequest smsRequest = new SmsRequest();
 
