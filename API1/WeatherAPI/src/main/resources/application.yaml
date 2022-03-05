@@ -23,5 +23,5 @@ spring:
 
 api:
   config:
-    api2URL: http://localhost:3030/api-two/send-text
-    api3URL: http://localhost:8081/api-three/request/update-db
+    api2URL: ${API2URL}
+    api3URL: ${API3URL}
