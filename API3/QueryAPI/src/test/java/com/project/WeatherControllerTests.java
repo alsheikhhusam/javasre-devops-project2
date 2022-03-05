@@ -44,32 +44,4 @@ public class WeatherControllerTests {
     @MockBean
     private RestTemplate restTemplate;
 
-    @MockBean
-    private MockRestServiceServer mockServer;
-
-    @BeforeAll
-    void init() {
-        mockServer = MockRestServiceServer.createServer(restTemplate);
-    }
-
-    @Test
-    void shouldReturnOkay() throws Exception {
-        String response = "";
-        int id = 3;
-        RequestDTO requestDTO = new RequestDTO();
-        when(requestService.getZipCode(anyInt())).thenReturn(new ZipCode());
-        when(requestService.getCity(anyString())).thenReturn(new City());
-        when(restTemplate.getForObject(anyString(), String.class)).thenReturn(response);
-        when(requestService.save(requestDTO)).thenReturn(id);
-
-//        mockServer.expect(ExpectedCount.once())
-//                .andExpect(method(HttpMethod.GET))
-//                        .andRespond();
-
-        requestService.save(any());
-        mockMvc.perform(post("/update-db")
-                        .contentType("text/plain;charset=UTF-8")
-                .content("Redmond")
-        ).andExpect(status().isOk());
-    }
 }
