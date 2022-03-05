@@ -1,12 +1,8 @@
 pipeline {
   environment {
-<<<<<<< HEAD
-    registry = 'timhansz/weather-api'
-=======
     api1Registry = 'husamalsheikh/weatherapi'
     api2Registry = 'husamalsheikh/twilioapi'
     api3Registry = 'husamalsheikh/queryapi'
->>>>>>> 583cad32888173864c01b4139c335ce55ff7612f
     dockerHubCreds = 'docker_hub'
     dockerImage = ''
   }
@@ -23,72 +19,6 @@ pipeline {
           withMaven {
             sh 'mvn test'
           }
-<<<<<<< HEAD
-            }
-            dir('API2/Twilio-api') {
-              withMaven {
-                  sh 'mvn test'
-              }
-            }
-            dir('API3/QueryAPI') {
-              withMaven {
-                  sh 'mvn test'
-              }
-            }
-      }
-    }
-    stage('Build') {
-      when { anyOf {
-        branch 'feature/*'
-        branch 'dev'
-        branch 'main'
-        }
-      }
-        steps {
-          dir('API1/WeatherAPI') {
-            withMaven {
-              sh 'mvn clean package -DskipTests'
-            }
-          }
-          dir('API2/Twilio-api') {
-            withMaven {
-              sh 'mvn clean package -DskipTests'
-            }
-          }
-          dir('API3/QueryAPI') {
-            withMaven {
-              sh 'mvn clean package -DskipTests'
-            }
-          }
-        }
-    }
-    stage('Docker Build') {
-        when { anyOf {
-        branch 'main'
-        }
-      }
-        steps {
-          dir('API1/WeatherAPI') {
-            script {
-                echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
-            }
-          }
-          dir('API2/Twilio-api') {
-            script {
-                echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
-            }
-          }
-          dir('API3/QueryAPI') {
-            script {
-                echo "$registry:$currentBuild.number"
-                dockerImage = docker.build "$registry"
-            }
-          }
-        }
-    }
-=======
         }
         dir('API2/Twilio-api') {
           withMaven {
@@ -205,6 +135,5 @@ pipeline {
         }
       }
     }
->>>>>>> 583cad32888173864c01b4139c335ce55ff7612f
   }
 }
