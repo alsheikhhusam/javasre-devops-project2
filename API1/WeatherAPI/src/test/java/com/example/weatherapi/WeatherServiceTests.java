@@ -11,7 +11,9 @@ import com.example.weatherapi.models.ZipCode;
 import com.example.weatherapi.services.WeatherService;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -26,6 +28,15 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class WeatherServiceTests {
+
+    @Value("8080")
+    int port;
+
+    @Value("${api.config.api2URL:http://localhost:3030/api-two/send-text}")
+    String url2;
+
+    @Value("${api.config.api3URL:http://localhost:8081/api-three/request/update-db}")
+    String url3;
 
     @MockBean
     private WeatherRepo weatherRepo;
@@ -102,7 +113,7 @@ public class WeatherServiceTests {
     }
 
     @Test
-    void shouldRetunrNullForecastIfInvalidLocation() {
+    void shouldReturnNullForecastIfInvalidLocation() {
         when(cityRepo.getByCityName(cityLocation)).thenReturn(city);
         when(requestRepo.getRequestByCitiesIdAndReqDate(city.getId())).thenReturn(null);
 

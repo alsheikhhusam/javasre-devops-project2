@@ -110,6 +110,11 @@ spec:
           name: weather-system-api
           ports:
             - containerPort: 8080
+          env:
+            - name: API2URL
+              value: http://twilio-service:3030/api-two/send-text
+            - name: API3URL
+              value: http://query-service:8081/api-three/request/update-db
           readinessProbe:
             tcpSocket:
               port: 8080

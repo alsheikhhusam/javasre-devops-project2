@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,6 +39,9 @@ class WeatherControllerTests {
 
     @MockBean
     WeatherService weatherService;
+
+    @Value("8080")
+    int port;
 
     @Value("${api.config.api2URL:http://localhost:3030/api-two/send-text}")
     String url2;
@@ -92,7 +96,7 @@ class WeatherControllerTests {
         smsString.add(new smsDTO(textDTO.getLocation(), weatherDTO.toString()).toString());
 
         when(weatherService.getCurrentWeather(textDTO.getLocation())).thenReturn(null);
-
+        when(weatherService.getCurrentWeather(textDTO.getLocation())).thenReturn(weatherDTO);
         when(restTemplate.postForEntity(url3, textDTO.getLocation(), null))
                 .thenReturn(ResponseEntity.ok().build());
         when(restTemplate.postForEntity(url2, smsString, null))
@@ -157,8 +161,7 @@ class WeatherControllerTests {
     @Test
     void shouldGetForecastByCityName() throws Exception {
         String location = "Dallas";
-        List<WeatherDTO> weatherDTOList = null;
-        weatherDTOList.add(weatherDTO);
+        List<WeatherDTO> weatherDTOList = Collections.singletonList(weatherDTO);
         when(weatherService.getForecast(location)).thenReturn(weatherDTOList);
         mockMvc.perform(get("/weather/get-forecast")
                         .contentType(MediaType.TEXT_PLAIN_VALUE)

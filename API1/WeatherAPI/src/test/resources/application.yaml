@@ -23,5 +23,5 @@ spring:
 
 api:
   config:
-#    api2URL: ${API2URL}
-#    api3URL: ${API3URL}
+    api2URL: ${API2URL}
+    api3URL: ${API3URL}
