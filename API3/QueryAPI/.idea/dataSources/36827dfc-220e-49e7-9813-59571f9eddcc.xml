@@ -23,7 +23,7 @@
 12708||10|C|G
 12708||-9223372036854775808|U|G
 12708||10|U|G</Grants>
-      <IntrospectionStateNumber>137473</IntrospectionStateNumber>
+      <IntrospectionStateNumber>88253</IntrospectionStateNumber>
       <ObjectId>12996</ObjectId>
       <Relations>sequence|table|16617|16619|1
 sequence|table|16630|16632|1
@@ -3226,7 +3226,7 @@ sequence|table|16667|16669|1
     <schema id="246" parent="4" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>137473</IntrospectionStateNumber>
+      <IntrospectionStateNumber>88253</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>1154</StateNumber>
       <OwnerName>cloudsqlsuperuser</OwnerName>

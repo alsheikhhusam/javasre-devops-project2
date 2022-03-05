@@ -53,8 +53,8 @@ public class WeatherController {
 
         //  If weatherDTO is null, no weather data found on location. Call API3 (Query API)
         if(weatherDTO == null) {
-            log.info("-> No data on {}" , textDTO.getLocation());
-            log.info("-> Requesting Weather Update for {}" , textDTO.getLocation());
+            log.info("-> No data on {}", textDTO.getLocation());
+            log.info("-> Requesting Weather Update for {}", textDTO.getLocation());
 
             ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url3, textDTO.getLocation(), null);
             if(responseEntity.getStatusCode().is5xxServerError()){
