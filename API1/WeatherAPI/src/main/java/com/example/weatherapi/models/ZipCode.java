@@ -1,6 +1,8 @@
 package com.example.weatherapi.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -11,6 +13,8 @@ import java.math.BigDecimal;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "zip_codes")
 public class ZipCode {
     @Id

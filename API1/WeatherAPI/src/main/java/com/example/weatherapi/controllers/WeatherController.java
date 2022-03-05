@@ -52,29 +52,11 @@ public class WeatherController {
         List<String> smsString = new java.util.ArrayList<>(Collections.singletonList(textDTO.getPhoneNum()));
 
         WeatherDTO weatherDTO = weatherService.getCurrentWeather(textDTO.getLocation());
-<<<<<<< HEAD
 
         //  If weatherDTO is null, no weather data found on location. Call API3 (Query API)
         if(weatherDTO == null) {
             log.info("-> No data on {}", textDTO.getLocation());
             log.info("-> Requesting Weather Update for {}", textDTO.getLocation());
-
-            ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url3, textDTO.getLocation(), null);
-            if(responseEntity.getStatusCode().is5xxServerError()){
-                log.error("-> Failed to connect to API 3");
-                return ResponseEntity.internalServerError().build();
-            }
-
-            weatherDTO = weatherService.getCurrentWeather(textDTO.getLocation());
-        }
-        smsString.add(weatherService.getCurrentWeather(textDTO.getLocation()).toString());
-=======
->>>>>>> 583cad32888173864c01b4139c335ce55ff7612f
-
-        //  If weatherDTO is null, no weather data found on location. Call API3 (Query API)
-        if(weatherDTO == null) {
-            log.info("-> No data on {}" , textDTO.getLocation());
-            log.info("-> Requesting Weather Update for {}" , textDTO.getLocation());
 
             ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url3, textDTO.getLocation(), null);
             if(responseEntity.getStatusCode().is5xxServerError()){
