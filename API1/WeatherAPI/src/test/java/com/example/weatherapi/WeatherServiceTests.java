@@ -52,6 +52,7 @@ public class WeatherServiceTests {
 
     String cityLocation = "Dallas";
     String zipLocation = "14610";
+
     City city = new City(1, cityLocation, BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), "Texas");
     ZipCode zipCode = new ZipCode(2, BigDecimal.valueOf(2.0), BigDecimal.valueOf(2.0));
     Request request = new Request(1, OffsetDateTime.now(), city, zipCode);
