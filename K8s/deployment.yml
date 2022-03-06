@@ -65,6 +65,9 @@ spec:
           name: twilio-system-api
           ports:
             - containerPort: 3030
+          env:
+            - name: auth_token
+              value: 01a9531b98b3ddf47c6f70f2aedfdfc4
           resources:
             requests:
               memory: "200Mi"
