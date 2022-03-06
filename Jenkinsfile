@@ -83,6 +83,27 @@ pipeline {
           }
         }
     }
+    stage('Wait for SRE approval') {
+      when {
+        branch 'main'
+      }
+      steps {
+        script {
+          try {
+            timeout(time: 12, unit: 'HOURS') {
+              approved = input message: 'Deploy to production?', ok: 'Continue',
+              parameters: [choice(name: 'Approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
+              if(approved != 'Yes') {
+                error('Build did not pass approval')
+              }
+            }
+          } catch(error) {
+            error('Build failed because timout was exceeded.')
+          }
+        }
+      }
+    }
+  }
     stage('Docker Push') {
       when {
         branch 'main'
@@ -114,25 +135,15 @@ pipeline {
         }
       }
     }
-    stage('Wait for SRE approval') {
+    stage('Notify Discord') {
       when {
-        branch 'main'
+        branch 'feature/jenkins-pipeline'
       }
       steps {
-        script {
-          try {
-            timeout(time: 12, unit: 'HOURS') {
-              approved = input message: 'Deploy to production?', ok: 'Continue',
-              parameters: [choice(name: 'Approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
-              if(approved != 'Yes') {
-                error('Build did not pass approval')
-              }
-            }
-          } catch(error) {
-            error('Build failed because timout was exceeded.')
-          }
-        }
+        discordSend description: "Build #$currentBuild.number",
+          link: BUILD_URL, result: currentBuild.currentResult,
+          title: JOB_NAME,
+          webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
       }
     }
-  }
 }
