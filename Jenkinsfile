@@ -90,7 +90,7 @@ pipeline {
       steps {
         script {
           try {
-            timeout(time: 12, unit: 'HOURS') {
+            timeout(time: 60, unit: 'MINUTES') {
               approved = input message: 'Deploy to production?', ok: 'Continue',
               parameters: [choice(name: 'Approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
               if(approved != 'Yes') {
@@ -103,7 +103,6 @@ pipeline {
         }
       }
     }
-  }
     stage('Docker Push') {
       when {
         branch 'main'
@@ -146,4 +145,5 @@ pipeline {
           webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
       }
     }
+  }
 }
