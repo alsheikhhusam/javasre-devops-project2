@@ -1,8 +1,13 @@
 package com.project.Models;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "cities")
 public class City {

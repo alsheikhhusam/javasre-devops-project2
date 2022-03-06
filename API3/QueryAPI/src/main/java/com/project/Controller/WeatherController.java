@@ -26,6 +26,7 @@ import java.util.Date;
 @Slf4j
 public class WeatherController {
 
+
     private final RestTemplate restTemplate;
     private final WeatherService weatherService;
     private final RequestService requestService;
@@ -66,9 +67,16 @@ public class WeatherController {
 
             cityName = location;
             cityObject = requestService.getCity(location);
+
+            //Update 3/5 - If location does not exist, POST 400.
+            if(cityObject == null){
+                log.debug("Location is invalid");
+                return ResponseEntity.badRequest().body("Location is invalid.");
+            }
             log.info(cityName);
         } catch(Exception ex) {
             log.debug("Location is invalid");
+            //return ResponseEntity.badRequest().build();
         }
 
         // Query DB for Lat/Long of ZipCode or CityName
