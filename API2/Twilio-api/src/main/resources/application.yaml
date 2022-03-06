@@ -1,6 +1,6 @@
 twilio:
   account_sid: ACf5ee8b9fb9f5b7611221e802c030dbb1
-  auth_token: e44e9ce119eda59afe8e318287821411
+  auth_token: ${token}
   trial_number: +18647635559
 
 server:

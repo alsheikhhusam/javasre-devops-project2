@@ -36,8 +36,9 @@ resource "google_container_node_pool" "primary_nodes" {
   cluster    = google_container_cluster.primary.name
   node_count = var.gke_num_nodes
 
-  node_locations = [ # Only 1 zone to limit number of nodes created. (is currently set to 1 node for each zone)
-      "us-central1-a",
+  node_locations = [ # Only 2 zone. limits number of nodes created
+    "us-central1-a",
+    "us-central1-b",
   ]
 
   node_config {
@@ -50,7 +51,7 @@ resource "google_container_node_pool" "primary_nodes" {
       env = var.project_id
     }
 
-    machine_type = "n1-standard-1"
+    machine_type = "n2-standard-2"
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"

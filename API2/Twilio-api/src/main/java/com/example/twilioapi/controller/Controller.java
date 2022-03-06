@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/send-text")
 public class Controller {
 
-
     private final SenderService senderService;
 
     @Autowired
@@ -30,20 +29,14 @@ public class Controller {
      */
     @PostMapping
     public void sendSms(@Validated @RequestBody List<String> weatherDTO) {
+        log.info("-> API 2 Received request");
+        
         SmsRequest smsRequest = new SmsRequest();
+
         smsRequest.setPhoneNumber(weatherDTO.get(0));
-//        smsRequest.setMessage(weatherDTO.get(1-???????)); //get 1 - [as much as I need]
-//        position 0 is phone number, 1-? is message
-
-//        StringBuilder message = new StringBuilder();
-//        for (int i = 1; i < weatherDTO.size(); i++) {
-//            message.append(weatherDTO.get(i));
-//            if(i+1 != weatherDTO.size()){
-//                message.append("\n\n");
-//            }
-//        }
-
         smsRequest.setMessage(weatherDTO.get(1));
+
+        log.info("-> API 2 Sending text...");
         senderService.sendSms(smsRequest);
     }
 }

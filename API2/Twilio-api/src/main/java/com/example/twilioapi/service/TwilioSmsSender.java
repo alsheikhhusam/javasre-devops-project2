@@ -39,7 +39,6 @@ public class TwilioSmsSender implements SmsSender {
         }
 
     }
-
     private boolean isPhoneNumberValid(String phoneNumber) {
         return true;
     }
