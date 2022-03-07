@@ -93,7 +93,6 @@ pipeline {
         dir('API1/WeatherAPI') {
           script {
             docker.withRegistry('', dockerHubCreds) {
-              dockerImage.push("$currentBuild.number")
               dockerImage.push("latest")
             }
           }
@@ -101,7 +100,6 @@ pipeline {
         dir('API2/Twilio-api') {
           script {
             docker.withRegistry('', dockerHubCreds) {
-              dockerImage.push("$currentBuild.number")
               dockerImage.push("latest")
             }
           }
@@ -109,7 +107,6 @@ pipeline {
         dir('API3/QueryAPI') {
           script {
             docker.withRegistry('', dockerHubCreds) {
-              dockerImage.push("$currentBuild.number")
               dockerImage.push("latest")
             }
           }
