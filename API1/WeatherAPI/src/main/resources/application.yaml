@@ -8,7 +8,7 @@ spring:
     name: postgres
   datasource:
     username: postgres
-    password: Passw0rd123
+    password: Lb!5OmuNb&02JIdLcf!T4#yI
     url: jdbc:postgresql://34.70.53.178:5432/postgres
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -23,5 +23,5 @@ spring:
 
 api:
   config:
-#    api2URL: ${API2URL}
-#    api3URL: ${API3URL}
+    api2URL: ${API2URL}
+    api3URL: ${API3URL}

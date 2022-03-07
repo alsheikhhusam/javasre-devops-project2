@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: postgres
+  datasource:
+    username: postgres
+    password: Lb!5OmuNb&02JIdLcf!T4#yI
+    url: jdbc:postgresql://34.70.53.178:5432/postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8081
+  servlet:
+    context-path: /api-three

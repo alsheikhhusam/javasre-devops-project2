@@ -28,12 +28,15 @@ public class Controller {
      * @param weatherDTO SMS Object containing SMS details
      */
     @PostMapping
-    public void sendSms(@Validated @RequestBody List<String> weatherDTO) {
+    public void sendSms(@RequestBody List<String> weatherDTO) {
+        log.info("-> API 2 Received request");
+        
         SmsRequest smsRequest = new SmsRequest();
 
         smsRequest.setPhoneNumber(weatherDTO.get(0));
         smsRequest.setMessage(weatherDTO.get(1));
 
+        log.info("-> API 2 Sending text...");
         senderService.sendSms(smsRequest);
     }
 }

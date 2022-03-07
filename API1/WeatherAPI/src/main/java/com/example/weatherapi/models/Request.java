@@ -1,13 +1,15 @@
 package com.example.weatherapi.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
 @Getter @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "requests")
 public class Request {
     @Id
