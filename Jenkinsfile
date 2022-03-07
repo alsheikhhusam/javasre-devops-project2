@@ -159,8 +159,8 @@ pipeline {
             branch 'dev'
         }
         steps{
-           sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./K8s/deployment.yml'
-           sh 'cat ./K8s/deployment.yml'
+           sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./K8s/deployment.yaml'
+           sh 'cat ./K8s/deployment.yaml'
             step([$class: 'KubernetesEngineBuilder',
                 projectId: 'windy-album-339219',
                 clusterName: 'project2-gke',
