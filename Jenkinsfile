@@ -10,6 +10,7 @@ pipeline {
   }
   agent any
   stages {
+
     stage('Test') {
     when  { anyOf {
       branch 'feature/*'
@@ -33,6 +34,7 @@ pipeline {
         }
       }
     }
+
     stage('Maven Package') {
       when { anyOf {
         branch 'feature/*'
@@ -58,10 +60,11 @@ pipeline {
           }
         }
     }
+
     stage('Docker Build') {
         when { anyOf {
-          branch 'dev'
           branch 'main'
+          branch 'dev'
         }
       }
         steps {
@@ -85,10 +88,11 @@ pipeline {
           }
         }
     }
+
     stage('Docker Push') {
       when { anyOf {
-          branch 'main'
-          branch 'dev'
+        branch 'dev'
+        branch 'main'
         }
       }
       steps {
@@ -115,14 +119,28 @@ pipeline {
         }
       }
     }
-    stage('Wait for SRE approval') {
+
+    stage('Notify Discord') {
       when {
+        branch 'dev'
         branch 'main'
+      }
+      steps {
+        discordSend description: "Build #$currentBuild.number",
+          link: BUILD_URL, result: currentBuild.currentResult,
+          title: JOB_NAME,
+          webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
+      }
+    }
+
+    stage('Wait for SRE approval to Deploy') {
+      when {
+        branch 'dev'
       }
       steps {
         script {
           try {
-            timeout(time: 12, unit: 'HOURS') {
+            timeout(time: 60, unit: 'MINUTES') {
               approved = input message: 'Deploy to production?', ok: 'Continue',
               parameters: [choice(name: 'Approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
               if(approved != 'Yes') {
@@ -135,10 +153,26 @@ pipeline {
         }
       }
     }
+
+    stage('Deploy to GKE') {
+        when {
+            branch 'dev'
+        }
+        steps{
+           sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./K8s/deployment.yml'
+           sh 'cat ./K8s/deployment.yml'
+            step([$class: 'KubernetesEngineBuilder',
+                projectId: 'windy-album-339219',
+                clusterName: 'project2-gke',
+                zone: 'us-central1',
+                manifestPattern: 'K8s/',
+                credentialsId: 'windy-album-339219-creds.json',
+                verifyDeployments: true
+            ])
+        }
+    }
+
     stage('Clean Workspace') {
-      when{
-        branch 'feature/jenkins-pipeline'
-      }
       steps {
         cleanWs()
       }
