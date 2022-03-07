@@ -126,20 +126,21 @@ pipeline {
           branch 'dev'
           branch 'main'
         }
+      }
       steps {
         discordSend description: "Build #$currentBuild.number",
           link: BUILD_URL, result: currentBuild.currentResult,
           title: JOB_NAME,
           webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
       }
-      }
     }
 
     stage('Wait for SRE approval to Deploy') {
       when { anyOf {
-          branch 'dev'
-          branch 'main'
+        branch 'dev'
+        branch 'main'
         }
+      }
       steps {
         script {
           try {
@@ -155,26 +156,25 @@ pipeline {
           }
         }
       }
-      }
     }
 
     stage('Deploy to GKE') {
-        when { anyOf {
-          branch 'dev'
-          branch 'main'
-        }
-        steps{
-           sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/deployment.yml'
-           sh 'cat ./k8s/deployment.yml'
-            step([$class: 'KubernetesEngineBuilder',
-                projectId: 'windy-album-339219',
-                clusterName: 'project2-gke',
-                zone: 'us-central1',
-                manifestPattern: 'k8s/',
-                credentialsId: 'windy-album-339219-creds.json',
-                verifyDeployments: true
-            ])
-        }
+      when { anyOf {
+        branch 'dev'
+        branch 'main'
+      }
+      }
+      steps{
+          sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/deployment.yml'
+          sh 'cat ./k8s/deployment.yml'
+          step([$class: 'KubernetesEngineBuilder',
+              projectId: 'windy-album-339219',
+              clusterName: 'project2-gke',
+              zone: 'us-central1',
+              manifestPattern: 'k8s/',
+              credentialsId: 'windy-album-339219-creds.json',
+              verifyDeployments: true
+          ])
       }
     }
 
