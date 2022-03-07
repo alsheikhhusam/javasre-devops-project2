@@ -41,6 +41,8 @@ pipeline {
         }
       }
         steps {
+          cleanWs()
+          
           dir('API1/WeatherAPI') {
             withMaven {
               sh 'mvn clean package -DskipTests'
