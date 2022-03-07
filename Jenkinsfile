@@ -165,13 +165,13 @@ pipeline {
       }
       }
       steps{
-          sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/deployment.yml'
-          sh 'cat ./k8s/deployment.yml'
+          sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./K8s/deployment.yaml'
+          sh 'cat ./K8s/deployment.yml'
           step([$class: 'KubernetesEngineBuilder',
               projectId: 'windy-album-339219',
               clusterName: 'project2-gke',
               zone: 'us-central1',
-              manifestPattern: 'k8s/',
+              manifestPattern: 'K8s/',
               credentialsId: 'windy-album-339219-creds.json',
               verifyDeployments: true
           ])
