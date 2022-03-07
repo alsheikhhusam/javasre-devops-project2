@@ -74,13 +74,7 @@ public class WeatherService {
             return null;
         }
 
-        Weather weather = weatherRepo.getCurrentByCity(checkData(location));
-        log.info("-> Weather: {}", weather);
-
-        WeatherDTO weatherDTO = new WeatherDTO(weather);
-        log.info("-> WeatherDTO: {}", weatherDTO);
-
-        return weatherDTO;
+        return new WeatherDTO(weatherRepo.getCurrentByCity(checkData(location)));
     }
 
     /**
