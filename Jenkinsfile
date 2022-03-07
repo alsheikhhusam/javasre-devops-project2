@@ -4,7 +4,9 @@ pipeline {
     api2Registry = 'husamalsheikh/twilioapi'
     api3Registry = 'husamalsheikh/queryapi'
     dockerHubCreds = 'docker_hub'
-    dockerImage = ''
+    dockerImage1 = ''
+    dockerImage2 = ''
+    dockerImage3 = ''
   }
   agent any
   stages {
@@ -66,19 +68,19 @@ pipeline {
           dir('API1/WeatherAPI') {
             script {
                 echo "$api1Registry:$currentBuild.number"
-                dockerImage = docker.build "$api1Registry"
+                dockerImage1 = docker.build "$api1Registry"
             }
           }
           dir('API2/Twilio-api') {
             script {
                 echo "$api2Registry:$currentBuild.number"
-                dockerImage = docker.build "$api2Registry"
+                dockerImage2 = docker.build "$api2Registry"
             }
           }
           dir('API3/QueryAPI') {
             script {
                 echo "$api3Registry:$currentBuild.number"
-                dockerImage = docker.build "$api3Registry"
+                dockerImage3 = docker.build "$api3Registry"
             }
           }
         }
@@ -93,21 +95,21 @@ pipeline {
         dir('API1/WeatherAPI') {
           script {
             docker.withRegistry('', dockerHubCreds) {
-              dockerImage.push("latest")
+              dockerImage1.push("latest")
             }
           }
         }
         dir('API2/Twilio-api') {
           script {
             docker.withRegistry('', dockerHubCreds) {
-              dockerImage.push("latest")
+              dockerImage2.push("latest")
             }
           }
         }
         dir('API3/QueryAPI') {
           script {
             docker.withRegistry('', dockerHubCreds) {
-              dockerImage.push("latest")
+              dockerImage3.push("latest")
             }
           }
         }
