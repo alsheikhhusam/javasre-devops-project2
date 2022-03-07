@@ -172,7 +172,7 @@ pipeline {
               clusterName: 'project2-gke',
               zone: 'us-central1',
               manifestPattern: 'K8s/',
-              credentialsId: 'windy-album-339219-creds.json',
+              credentialsId: 'project2-gke',
               verifyDeployments: true
           ])
       }
