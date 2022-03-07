@@ -14,6 +14,7 @@ pipeline {
     stage('Test') {
     when  { anyOf {
       branch 'feature/*'
+      branch 'dev'
       }
     }
       steps {
@@ -63,8 +64,8 @@ pipeline {
 
     stage('Docker Build') {
         when { anyOf {
-          branch 'main'
           branch 'dev'
+          branch 'main'
         }
       }
         steps {
@@ -122,10 +123,9 @@ pipeline {
 
     stage('Notify Discord') {
       when { anyOf {
-        branch 'dev'
-        branch 'main'
+          branch 'dev'
+          branch 'main'
         }
-      }
       steps {
         discordSend description: "Build #$currentBuild.number",
           link: BUILD_URL, result: currentBuild.currentResult,
@@ -135,9 +135,10 @@ pipeline {
     }
 
     stage('Wait for SRE approval to Deploy') {
-      when {
-        branch 'dev'
-      }
+      when { anyOf {
+          branch 'dev'
+          branch 'main'
+        }
       steps {
         script {
           try {
@@ -156,18 +157,19 @@ pipeline {
     }
 
     stage('Deploy to GKE') {
-        when {
-            branch 'dev'
+        when { anyOf {
+          branch 'dev'
+          branch 'main'
         }
         steps{
-           sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./K8s/deployment.yaml'
-           sh 'cat ./K8s/deployment.yaml'
+           sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/deployment.yml'
+           sh 'cat ./k8s/deployment.yml'
             step([$class: 'KubernetesEngineBuilder',
                 projectId: 'windy-album-339219',
                 clusterName: 'project2-gke',
                 zone: 'us-central1',
-                manifestPattern: 'K8s/',
-                credentialsId: 'project2-gke',
+                manifestPattern: 'k8s/',
+                credentialsId: 'windy-album-339219-creds.json',
                 verifyDeployments: true
             ])
         }
