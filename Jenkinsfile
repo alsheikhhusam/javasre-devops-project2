@@ -65,6 +65,7 @@ pipeline {
     stage('Docker Build') {
         when { anyOf {
           branch 'main'
+          branch 'dev'
         }
       }
         steps {
@@ -90,8 +91,10 @@ pipeline {
     }
 
     stage('Docker Push') {
-      when {
+      when { anyOf {
         branch 'dev'
+        branch 'main'
+        }
       }
       steps {
         dir('API1/WeatherAPI') {
@@ -118,21 +121,9 @@ pipeline {
       }
     }
 
-    stage('Notify Discord') {
-      when {
-        branch 'feature/jenkins-pipeline'
-      }
-      steps {
-        discordSend description: "Build #$currentBuild.number",
-          link: BUILD_URL, result: currentBuild.currentResult,
-          title: JOB_NAME,
-          webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
-      }
-    }
-
     stage('Wait for SRE approval to Deploy') {
       when {
-        branch 'main'
+        branch 'dev'
       }
       steps {
         script {
@@ -169,10 +160,20 @@ pipeline {
         }
     }
 
-    stage('Clean Workspace') {
-      when{
-        branch 'feature/jenkins-pipeline'
+    stage('Notify Discord') {
+      when {
+        branch 'dev'
+        branch 'main'
       }
+      steps {
+        discordSend description: "Build #$currentBuild.number",
+          link: BUILD_URL, result: currentBuild.currentResult,
+          title: JOB_NAME,
+          webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
+      }
+    }
+
+    stage('Clean Workspace') {
       steps {
         cleanWs()
       }
