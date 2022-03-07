@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Test') {
     when  { anyOf {
-
+      branch 'feature/*'
       branch 'dev'
       }
     }
@@ -29,6 +29,8 @@ pipeline {
           withMaven {
               sh 'mvn test'
           }
+
+          cleanWs()
         }
       }
     }
