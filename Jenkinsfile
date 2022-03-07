@@ -132,6 +132,7 @@ pipeline {
           title: JOB_NAME,
           webhookURL: "https://discord.com/api/webhooks/949839260050141205/rJ48IDNgUUpKpIgePlV97ieIPf4srG73pv9ZUSGcgf-g0Hp5Zzm4aSNGv6m0lOwDd-SJ"
       }
+      }
     }
 
     stage('Wait for SRE approval to Deploy') {
@@ -154,6 +155,7 @@ pipeline {
           }
         }
       }
+      }
     }
 
     stage('Deploy to GKE') {
@@ -173,6 +175,7 @@ pipeline {
                 verifyDeployments: true
             ])
         }
+      }
     }
 
     stage('Clean Workspace') {
