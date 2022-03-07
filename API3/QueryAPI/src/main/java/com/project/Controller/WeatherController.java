@@ -130,20 +130,20 @@ public class WeatherController {
 
 
          ModelDTO weather = new ModelDTO();
-             weather.setDate(offsetCurrentDate);
-             weather.setTemperature(weatherSaved.daily[0].temp.max);
-             weather.setFeelsLike(weatherSaved.daily[0].feels_like.day);
-             weather.setPressure(weatherSaved.daily[0].pressure);
-             weather.setHumidity(weatherSaved.daily[0].humidity);
-             weather.setWindSpeed(weatherSaved.daily[0].wind_speed);
-             weather.setDescription(weatherSaved.daily[0].weather[0].description);
-             weather.setRequest(update);
-             weatherService.save(weather);
+//             weather.setDate(offsetCurrentDate);
+//             weather.setTemperature(weatherSaved.daily[0].temp.max);
+//             weather.setFeelsLike(weatherSaved.daily[0].feels_like.day);
+//             weather.setPressure(weatherSaved.daily[0].pressure);
+//             weather.setHumidity(weatherSaved.daily[0].humidity);
+//             weather.setWindSpeed(weatherSaved.daily[0].wind_speed);
+//             weather.setDescription(weatherSaved.daily[0].weather[0].description);
+//             weather.setRequest(update);
+//             weatherService.save(weather);
+//
+//             log.info("Current weather conditions have been added to the database.");
 
-             log.info("Current weather conditions have been added to the database.");
 
-
-        for(int i = 1; i < weatherSaved.daily.length - 1; i++){
+        for(int i = 0; i < weatherSaved.daily.length - 1; i++){
             currentDate = new Date(weatherSaved.daily[i].dt * 1000L);
             offsetCurrentDate = currentDate.toInstant().atOffset(ZoneOffset.UTC);
             weather.setDate(offsetCurrentDate);

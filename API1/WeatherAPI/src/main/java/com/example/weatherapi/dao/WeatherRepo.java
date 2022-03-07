@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface WeatherRepo extends JpaRepository<Weather, Integer> {
-    @Query(value = "select * from weather w where (cast(NOW() as date) = cast(w.weather_date as date)) and w.req_id = :req_id order by w.weather_date", nativeQuery = true)
+    @Query(value = "select * from weather w where (w.weather_date = (select MIN(w.weather_date) from weather w where w.req_id = 108)) and w.req_id = 108 order by w.weather_date", nativeQuery = true)
     Weather getCurrentByCity(@Param("req_id") Integer req_id);
 
     @Query(value = "select * from weather w where w.req_id = :req_id order by w.weather_date", nativeQuery = true)

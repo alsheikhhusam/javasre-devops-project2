@@ -11,7 +11,6 @@ pipeline {
     stage('Test') {
     when  { anyOf {
       branch 'feature/*'
-      branch 'dev'
       }
     }
       steps {
@@ -87,6 +86,7 @@ pipeline {
     stage('Docker Push') {
       when {
         branch 'main'
+        branch 'dev'
       }
       steps {
         dir('API1/WeatherAPI') {
