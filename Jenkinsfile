@@ -7,7 +7,20 @@ pipeline {
     dockerImage = ''
   }
   agent any
+  options {
+    // This is required if you want to clean before build
+    skipDefaultCheckout(true)
+  }
   stages {
+    stage('Build') {
+      steps {
+          // Clean before build
+          cleanWs()
+          // We need to explicitly checkout from SCM here
+          checkout scm
+          echo "Building ${env.JOB_NAME}..."
+      }
+    }
     stage('Test') {
     when  { anyOf {
       branch 'feature/*'
@@ -15,27 +28,26 @@ pipeline {
       }
     }
       steps {
-        // dir('API1/WeatherAPI') {
-        //   withMaven {
-        //     sh 'mvn test'
-        //   }
-        // }
-        // dir('API2/Twilio-api') {
-        //   withMaven {
-        //       sh 'mvn test'
-        //   }
-        // }
-        // dir('API3/QueryAPI') {
-        //   withMaven {
-        //       sh 'mvn test'
-        //   }
-        // }
-      cleanWs()
+        dir('API1/WeatherAPI') {
+          withMaven {
+            sh 'mvn test'
+          }
+        }
+        dir('API2/Twilio-api') {
+          withMaven {
+              sh 'mvn test'
+          }
+        }
+        dir('API3/QueryAPI') {
+          withMaven {
+              sh 'mvn test'
+          }
+        }
       }
     }
     stage('Maven Package') {
       when { anyOf {
-
+        branch 'feature/*'
         branch 'dev'
         branch 'main'
         }
