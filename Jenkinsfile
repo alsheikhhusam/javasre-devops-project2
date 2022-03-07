@@ -121,9 +121,10 @@ pipeline {
     }
 
     stage('Notify Discord') {
-      when {
+      when { anyOf {
         branch 'dev'
         branch 'main'
+        }
       }
       steps {
         discordSend description: "Build #$currentBuild.number",
