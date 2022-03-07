@@ -29,9 +29,8 @@ pipeline {
           withMaven {
               sh 'mvn test'
           }
-
-          cleanWs()
         }
+      cleanWs()
       }
     }
     stage('Maven Package') {
