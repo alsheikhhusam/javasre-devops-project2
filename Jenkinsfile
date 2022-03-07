@@ -135,5 +135,13 @@ pipeline {
         }
       }
     }
+    stage('Clean Workspace') {
+      when{
+        branch 'feature/jenkins-pipeline'
+      }
+      steps {
+        cleanWs()
+      }
+    }
   }
 }
