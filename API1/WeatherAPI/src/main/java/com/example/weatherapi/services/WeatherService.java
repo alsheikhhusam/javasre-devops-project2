@@ -7,6 +7,7 @@ import com.example.weatherapi.dto.WeatherDTO;
 import com.example.weatherapi.models.City;
 import com.example.weatherapi.models.Request;
 import com.example.weatherapi.models.Weather;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class WeatherService {
     private final WeatherRepo weatherRepo;
     private final RequestRepo requestRepo;
@@ -45,6 +47,7 @@ public class WeatherService {
         try{
             zip_city = Integer.parseInt(location);
             request = requestRepo.getRequestByZipCodes_Id(zip_city);
+
         }catch (NumberFormatException e){
             City city = cityRepo.getByCityName(location);
             zip_city = city.getId();
@@ -52,6 +55,8 @@ public class WeatherService {
         }
 
         //Request request = requestRepo.getByCitiesIdOrZipCodes_Id(zip_city, Optional.of(zip_city));
+
+        log.info("-> request: {}", request);
 
         if(request == null){
             return -1;
@@ -69,7 +74,13 @@ public class WeatherService {
             return null;
         }
 
-        return new WeatherDTO(weatherRepo.getCurrentByCity(checkData(location)));
+        Weather weather = weatherRepo.getCurrentByCity(checkData(location));
+        log.info("-> Weather: {}", weather);
+
+        WeatherDTO weatherDTO = new WeatherDTO(weather);
+        log.info("-> WeatherDTO: {}", weatherDTO);
+
+        return weatherDTO;
     }
 
     /**

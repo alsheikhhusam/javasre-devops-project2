@@ -1,15 +1,13 @@
 package com.example.weatherapi.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Getter @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cities")

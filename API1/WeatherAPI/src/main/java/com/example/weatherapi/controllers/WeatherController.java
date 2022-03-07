@@ -68,6 +68,7 @@ public class WeatherController {
 
         smsString.add(new smsDTO(textDTO.getLocation(), weatherDTO.toString()).toString());
 
+        log.info("-> Weather data found for location: {}", textDTO.getLocation());
         ResponseEntity<Object> responseEntity = restTemplate.postForEntity(url2, smsString, null);
         if(responseEntity.getStatusCode().is5xxServerError()){
             log.error("-> Failed to connect to API 2");
