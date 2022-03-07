@@ -15,21 +15,21 @@ pipeline {
       }
     }
       steps {
-        dir('API1/WeatherAPI') {
-          withMaven {
-            sh 'mvn test'
-          }
-        }
-        dir('API2/Twilio-api') {
-          withMaven {
-              sh 'mvn test'
-          }
-        }
-        dir('API3/QueryAPI') {
-          withMaven {
-              sh 'mvn test'
-          }
-        }
+        // dir('API1/WeatherAPI') {
+        //   withMaven {
+        //     sh 'mvn test'
+        //   }
+        // }
+        // dir('API2/Twilio-api') {
+        //   withMaven {
+        //       sh 'mvn test'
+        //   }
+        // }
+        // dir('API3/QueryAPI') {
+        //   withMaven {
+        //       sh 'mvn test'
+        //   }
+        // }
       cleanWs()
       }
     }
